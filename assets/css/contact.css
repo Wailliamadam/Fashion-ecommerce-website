@@ -1,0 +1,220 @@
+/*---------------------
+  Map
+-----------------------*/
+
+
+.map {
+	height: 500px;
+}
+
+.map iframe {
+	width: 100%;
+}
+
+
+/*---------------------
+  Contact
+-----------------------*/
+
+/* .contact__text .section-title {
+	text-align: left;
+	margin-bottom: 40px;
+}
+
+.contact__text .section-title h2 {
+	font-size: 48px;
+	margin-bottom: 18px;
+}
+
+.contact__text .section-title p {
+	color: #707070;
+	line-height: 26px;
+	margin-bottom: 0;
+}
+
+.contact__text ul li {
+	list-style: none;
+	margin-bottom: 26px;
+}
+
+.contact__text ul li:last-child {
+	margin-bottom: 0;
+}
+
+.contact__text ul li h4 {
+	color: #111111;
+	font-weight: 700;
+	margin-bottom: 8px;
+}
+
+.contact__text ul li p {
+	line-height: 27px;
+	margin-bottom: 0;
+}
+
+.contact__form input {
+	height: 50px;
+	width: 100%;
+	border: 1px solid #e1e1e1;
+	padding-left: 20px;
+	font-size: 15px;
+	color: #b7b7b7;
+	margin-bottom: 30px;
+}
+
+.contact__form input::-webkit-input-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form input::-moz-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form input:-ms-input-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form input::-ms-input-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form input::placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form textarea {
+	height: 150px;
+	width: 100%;
+	border: 1px solid #e1e1e1;
+	padding-left: 20px;
+	padding-top: 12px;
+	font-size: 15px;
+	color: #b7b7b7;
+	margin-bottom: 24px;
+	resize: none;
+}
+
+.contact__form textarea::-webkit-input-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form textarea::-moz-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form textarea:-ms-input-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form textarea::-ms-input-placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form textarea::placeholder {
+	color: #b7b7b7;
+}
+
+.contact__form button {
+	letter-spacing: 4px;
+	padding: 14px 35px;
+} */
+
+/* .site-btn {
+    font-size: 14px;
+    color: #ffffff;
+    background: #111111;
+    font-weight: 700;
+    border: none;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 14px 30px;
+} */
+
+
+/* Contact Section Styling */
+.contact.spad {
+    padding: 80px 0;
+}
+
+/* Contact Text Section */
+.contact__text .section-title {
+    text-align: left;
+    margin-bottom: 40px;
+}
+.contact__text .section-title span {
+    display: block;
+    color: #707070;
+    margin-bottom: 10px;
+}
+.contact__text .section-title h2 {
+    font-size: 48px;
+    margin-bottom: 18px;
+}
+.contact__text .section-title p {
+    color: #707070;
+    line-height: 26px;
+    margin-bottom: 0;
+}
+
+/* Address List Styling */
+.contact__text ul {
+    padding-left: 0;
+    list-style: none;
+}
+.contact__text ul li {
+    margin-bottom: 26px;
+}
+.contact__text ul li:last-child {
+    margin-bottom: 0;
+}
+.contact__text ul li h4 {
+    color: #111111;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.contact__text ul li p {
+    line-height: 27px;
+    margin-bottom: 0;
+}
+
+/* Contact Form Styling */
+.contact__form input,
+.contact__form textarea {
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    padding: 12px 20px;
+    font-size: 15px;
+    color: #111111;
+    margin-bottom: 20px;
+    transition: border 0.3s ease;
+}
+.contact__form input {
+    height: 50px;
+}
+.contact__form textarea {
+    height: 150px;
+    resize: none;
+}
+.contact__form input:focus,
+.contact__form textarea:focus {
+    border-color: #111111;
+    outline: none;
+}
+.contact__form ::placeholder {
+    color: #b7b7b7;
+}
+
+/* Button Styling */
+.site-btn {
+    background: #111111;
+    color: #fff;
+    border: none;
+    padding: 14px 35px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.site-btn:hover {
+    background: #333;
+}
+

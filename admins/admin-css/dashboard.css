@@ -1,0 +1,186 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body layout */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background-color: #1f2937;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: #f9fafb;
+}
+
+.sidebar a {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #d1d5db;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.sidebar a:hover {
+    background-color: #374151;
+}
+
+.sidebar a.active {
+    background-color: #2563eb;
+    color: #fff;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    padding: 8px 14px;
+    background-color: #ef4444;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: #dc2626;
+}
+
+/* Content box */
+.content-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-add {
+    background-color: #2563eb;
+}
+
+.btn-add:hover {
+    background-color: #1e40af;
+}
+
+.btn-edit {
+    background-color: #10b981;
+}
+
+.btn-edit:hover {
+    background-color: #059669;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+/* Table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+}
+
+.product-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Form */
+.form-section {
+    margin-top: 30px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.action-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}

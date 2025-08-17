@@ -1,0 +1,28 @@
+.owl-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.owl-nav i {
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 28px;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 50%;
+  pointer-events: all;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.owl-nav i:hover {
+  background-color: #000;
+}

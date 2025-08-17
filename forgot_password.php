@@ -1,0 +1,1 @@
+<?php if ($_POST) { /* email reset logic */ } ?>
