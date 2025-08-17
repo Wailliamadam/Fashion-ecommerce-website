@@ -223,39 +223,39 @@ function isActiveFilter($filter, $value) {
 
 
     #wishlist-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    color: #333;
-    font-weight: 500;
-    z-index: 1050;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-20px);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        color: #333;
+        font-weight: 500;
+        z-index: 1050;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
 
-#wishlist-notification.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
+    #wishlist-notification.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
 
-#wishlist-notification.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
+    #wishlist-notification.alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
 
-#wishlist-notification.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
+    #wishlist-notification.alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
 
     /* Animation for Active State */
     @keyframes pulse {
@@ -659,17 +659,17 @@ function isActiveFilter($filter, $value) {
         });
     });
 
-    
+
 
     // add wishlist functionality
     document.addEventListener('DOMContentLoaded', function() {
-    const wishlistButtons = document.querySelectorAll('.add-to-wishlist');
-    const wishlistBadge = document.querySelector('.wishlist-badge');
+        const wishlistButtons = document.querySelectorAll('.add-to-wishlist');
+        const wishlistBadge = document.querySelector('.wishlist-badge');
 
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.id = 'wishlist-notification';
-    notification.style.cssText = `
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.id = 'wishlist-notification';
+        notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
@@ -686,108 +686,111 @@ function isActiveFilter($filter, $value) {
         max-width: 300px;
         word-wrap: break-word;
     `;
-    document.body.appendChild(notification);
+        document.body.appendChild(notification);
 
-    // Function to update button UI
-    function updateButtonUI(button, action) {
-        if (action === 'added') {
-            button.classList.add('btn-primary');
-            button.classList.remove('btn-outline-primary');
-            button.innerHTML = '<i class="fas fa-heart"></i> Added to Wishlist';
-        } else if (action === 'removed') {
-            button.classList.remove('btn-primary');
-            button.classList.add('btn-outline-primary');
-            button.innerHTML = '<i class="far fa-heart"></i> Wishlist';
+        // Function to update button UI
+        function updateButtonUI(button, action) {
+            if (action === 'added') {
+                button.classList.add('btn-primary');
+                button.classList.remove('btn-outline-primary');
+                button.innerHTML = '<i class="fas fa-heart"></i> Added to Wishlist';
+            } else if (action === 'removed') {
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-outline-primary');
+                button.innerHTML = '<i class="far fa-heart"></i> Wishlist';
+            }
         }
-    }
 
-    // Improved notification function
-    function showNotification(message, isSuccess = true) {
-        // Update notification content and style
-        notification.textContent = message;
-        notification.style.backgroundColor = isSuccess ? '#28a745' : '#dc3545';
-        
-        // Reset animation state
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateY(-30px)';
-        
-        // Force reflow before showing
-        void notification.offsetHeight;
-        
-        // Show notification
-        notification.style.opacity = '1';
-        notification.style.transform = 'translateY(0)';
-        
-        // Hide after delay
-        setTimeout(() => {
+        // Improved notification function
+        function showNotification(message, isSuccess = true) {
+            // Update notification content and style
+            notification.textContent = message;
+            notification.style.backgroundColor = isSuccess ? '#28a745' : '#dc3545';
+
+            // Reset animation state
             notification.style.opacity = '0';
             notification.style.transform = 'translateY(-30px)';
-        }, 3000);
-    }
 
-    // Attach click listeners to wishlist buttons
-    wishlistButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productId = this.dataset.id;
-            const productName = this.dataset.name;
+            // Force reflow before showing
+            void notification.offsetHeight;
 
-            // Show loading state
-            const originalText = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            this.disabled = true;
+            // Show notification
+            notification.style.opacity = '1';
+            notification.style.transform = 'translateY(0)';
 
-            fetch('wishlist_handler.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `id=${productId}`
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    updateButtonUI(this, data.action);
-                    
-                    // Update wishlist badge count
-                    if (wishlistBadge) {
-                        wishlistBadge.textContent = data.wishlist_count;
-                        wishlistBadge.style.display = data.wishlist_count > 0 ? 'block' : 'none';
-                    }
+            // Hide after delay
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-30px)';
+            }, 3000);
+        }
 
-                    // Show appropriate notification
-                    const message = data.action === 'added' 
-                        ? `${productName} added to wishlist` 
-                        : `${productName} removed from wishlist`;
-                    showNotification(message);
-                } else {
-                    showNotification(data.message || 'Failed to update wishlist', false);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showNotification('Failed to update wishlist. Please try again.', false);
-            })
-            .finally(() => {
-                this.disabled = false;
-                this.innerHTML = originalText;
+        // Attach click listeners to wishlist buttons
+        wishlistButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.dataset.id;
+                const productName = this.dataset.name;
+
+                // Show loading state
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                this.disabled = true;
+
+                fetch('wishlist_handler.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `id=${productId}`
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            updateButtonUI(this, data.action);
+
+                            // Update wishlist badge count
+                            if (wishlistBadge) {
+                                wishlistBadge.textContent = data.wishlist_count;
+                                wishlistBadge.style.display = data.wishlist_count > 0 ?
+                                    'block' : 'none';
+                            }
+
+                            // Show appropriate notification
+                            const message = data.action === 'added' ?
+                                `${productName} added to wishlist` :
+                                `${productName} removed from wishlist`;
+                            showNotification(message);
+                        } else {
+                            showNotification(data.message || 'Failed to update wishlist',
+                                false);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showNotification('Failed to update wishlist. Please try again.',
+                            false);
+                    })
+                    .finally(() => {
+                        this.disabled = false;
+                        this.innerHTML = originalText;
+                    });
             });
         });
+
+        // Initialize wishlist badge visibility
+        if (wishlistBadge) {
+            wishlistBadge.style.display = wishlistBadge.textContent > 0 ? 'block' : 'none';
+        }
     });
 
-    // Initialize wishlist badge visibility
-    if (wishlistBadge) {
-        wishlistBadge.style.display = wishlistBadge.textContent > 0 ? 'block' : 'none';
-    }
-});
 
-    
-    
+
 
     // Price range validation
     const priceForm = document.querySelector('form[action="shop.php"]');

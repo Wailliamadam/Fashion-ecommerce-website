@@ -7,6 +7,12 @@ $dbname = 'fashion_db';
 $username = 'root';
 $password = '';
 
+// Image configuration (matches your shop)
+$upload_dir = 'uploads/';
+$default_images_dir = 'assets/products/defaults/';
+$admin_upload_dir = 'admins/uploads/';
+$default_product_image = 'assets/products/product-1.jpg';
+
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,23 +25,52 @@ try {
         $product_ids = array_keys($_SESSION['cart']);
         $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
         
-        $stmt = $db->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
+        $stmt = $db->prepare("SELECT id, name, price, image, discount FROM products WHERE id IN ($placeholders)");
         $stmt->execute($product_ids);
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($products as $product) {
             $item = $_SESSION['cart'][$product['id']];
-            $discounted_price = $product['price'] * (1 - $product['discount'] / 100);
+    
+            // Handle price calculations
+            $discount = $product['discount'] ?? 0;
+            $discounted_price = $discount > 0 ? 
+                $product['price'] * (1 - ($discount/100)) : 
+                $product['price'];
             $item_total = $discounted_price * $item['quantity'];
+            
+            // Unified image handling (matches your shop)
+            $image_filename = $product['image'] ?? '';
+            $image_src = '';
+            
+            // Check all possible image locations
+            if (!empty($image_filename)) {
+                $potential_paths = [
+                    $upload_dir . $image_filename,
+                    $admin_upload_dir . $image_filename
+                ];
+                
+                foreach ($potential_paths as $path) {
+                    if (file_exists($path)) {
+                        $image_src = $path;
+                        break;
+                    }
+                }
+            }
+            
+            // If no image found, use default fallback
+            if (empty($image_src)) {
+                $image_src = $default_product_image;
+            }
             
             $cart_items[] = [
                 'id' => $product['id'],
                 'name' => $product['name'],
                 'price' => $product['price'],
-                'discount' => $product['discount'],
+                'discount' => $discount,
                 'discounted_price' => $discounted_price,
                 'quantity' => $item['quantity'],
-                'image' => $product['image'],
+                'image' => $image_src,
                 'item_total' => $item_total
             ];
             
@@ -58,6 +93,7 @@ include 'includes/navbar.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Shopping Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -93,7 +129,8 @@ include 'includes/navbar.php';
                                                 <img src="<?= htmlspecialchars($item['image']) ?>"
                                                     alt="<?= htmlspecialchars($item['name']) ?>"
                                                     class="img-thumbnail me-3"
-                                                    style="width: 80px; height: 80px; object-fit: cover;">
+                                                    style="width: 80px; height: 80px; object-fit: cover;"
+                                                    onerror="this.src='<?= $default_product_image ?>'">
                                                 <div>
                                                     <h5 class="mb-1"><?= htmlspecialchars($item['name']) ?></h5>
                                                     <?php if ($item['discount'] > 0): ?>
@@ -218,8 +255,10 @@ include 'includes/navbar.php';
         // Remove item buttons
         document.querySelectorAll('.remove-item').forEach(btn => {
             btn.addEventListener('click', async function() {
-                const productId = this.dataset.id;
-                await updateCartItem(productId, 0); // 0 quantity removes the item
+                if (confirm('Are you sure you want to remove this item?')) {
+                    const productId = this.dataset.id;
+                    await updateCartItem(productId, 0);
+                }
             });
         });
 
