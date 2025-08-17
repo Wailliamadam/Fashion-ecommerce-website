@@ -486,11 +486,10 @@ function isActiveFilter($filter, $value) {
                                     <?php endif; ?>
 
                                     <div class="d-flex justify-content-between gap-2">
-                                        <!-- <button class="btn btn-outline-primary flex-grow-1 add-to-wishlist"
-                                            data-id="<?= $product['id'] ?>"
-                                            data-name="<?= htmlspecialchars($product['name']) ?>">
-                                            <i class="far fa-heart"></i> Wishlist
-                                        </button> -->
+                                        <button class="btn btn-outline-primary flex-grow-1"
+                                            onclick="window.location.href='product_details.php?id=<?= $product['id'] ?>'">
+                                            <i class="fas fa-info-circle me-2"></i> Product Details
+                                        </button>
 
                                         <button class="btn btn-primary add-to-cart" data-id="<?= $product['id'] ?>"
                                             data-name="<?= htmlspecialchars($product['name']) ?>">
