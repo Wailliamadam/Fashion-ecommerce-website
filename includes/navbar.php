@@ -229,7 +229,8 @@ $cart_count = isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'
                             <a class="dropdown-toggle d-flex align-items-center nav-link p-0" href="#"
                                 id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?php if (isset($_SESSION['username'])): ?>
-                                <img src="/assets/user-avatar.png" alt="User Avatar" class="profile-avatar-img">
+                                <img src="/assets/avatars/user-avatar.png.png" alt="User Avatar"
+                                    class="profile-avatar-img">
                                 <?php else: ?>
                                 <i class="fas fa-user-circle fa-lg"></i>
                                 <?php endif; ?>
@@ -238,7 +239,7 @@ $cart_count = isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'
                                 <?php if (isset($_SESSION['username'])): ?>
                                 <li>
                                     <div class="d-flex align-items-center px-3 py-2">
-                                        <img src="/assets/user-avatar.png" alt="User Avatar"
+                                        <img src="/assets/avatars/user-avatar.png.png" alt="User Avatar"
                                             class="profile-header-avatar">
                                         <div class="profile-info">
                                             <div class="profile-name">
