@@ -132,9 +132,17 @@ $cart_count = isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'
 
     /* Animation for cart update */
     @keyframes cartPulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1); }
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
     }
 
     .cart-pulse {
@@ -243,7 +251,8 @@ $cart_count = isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="/purchase_history.php"><i class="icon"></i>purchase history</a></li>
+                                <li><a class="dropdown-item" href="/purchase_history.php"><i class="icon"></i>purchase
+                                        history</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -274,48 +283,49 @@ $cart_count = isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Bootstrap dropdowns
-    var dropdownElementList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'));
-    dropdownElementList.map(function (dropdownToggleEl) {
-        return new bootstrap.Dropdown(dropdownToggleEl);
-    });
+        // Initialize Bootstrap dropdowns
+        var dropdownElementList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'));
+        dropdownElementList.map(function(dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl);
+        });
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-            var dropdowns = document.querySelectorAll('.dropdown-menu.show');
-            dropdowns.forEach(function(dropdown) {
-                dropdown.classList.remove('show');
-            });
-        }
-    });
-
-    // Function to update cart count
-    function updateCartCount(count) {
-        const cartIcon = document.getElementById('cartIcon');
-        let cartBadge = cartIcon.querySelector('.cart-count');
-
-        if (count > 0) {
-            if (!cartBadge) {
-                cartBadge = document.createElement('span');
-                cartBadge.className = 'cart-count';
-                cartIcon.appendChild(cartBadge);
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                var dropdowns = document.querySelectorAll('.dropdown-menu.show');
+                dropdowns.forEach(function(dropdown) {
+                    dropdown.classList.remove('show');
+                });
             }
-            cartBadge.textContent = count;
-        } else if (cartBadge) {
-            cartBadge.remove();
+        });
+
+        // Function to update cart count
+        function updateCartCount(count) {
+            const cartIcon = document.getElementById('cartIcon');
+            let cartBadge = cartIcon.querySelector('.cart-count');
+
+            if (count > 0) {
+                if (!cartBadge) {
+                    cartBadge = document.createElement('span');
+                    cartBadge.className = 'cart-count';
+                    cartIcon.appendChild(cartBadge);
+                }
+                cartBadge.textContent = count;
+            } else if (cartBadge) {
+                cartBadge.remove();
+            }
+
+            // Add animation
+            cartIcon.classList.add('cart-pulse');
+            setTimeout(() => {
+                cartIcon.classList.remove('cart-pulse');
+            }, 500);
         }
 
-        // Add animation
-        cartIcon.classList.add('cart-pulse');
-        setTimeout(() => {
-            cartIcon.classList.remove('cart-pulse');
-        }, 500);
-    }
-
-    // Initialize cart count
-    updateCartCount(<?= $cart_count ?>);
-});
-</script>
+        // Initialize cart count
+        updateCartCount(<?= $cart_count ?>);
+    });
+    </script>
 </body>
+
 </html>
